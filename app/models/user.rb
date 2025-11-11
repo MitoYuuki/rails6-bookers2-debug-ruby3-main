@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :books, dependent: :destroy
+  has_many :book_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+
   has_one_attached :profile_image
 
   validates :introduction, length: { maximum: 200 }
@@ -13,7 +16,12 @@ class User < ApplicationRecord
 
   
   
-  def get_profile_image
-    (profile_image.attached?) ? profile_image : 'no_image.jpg'
+  def get_profile_image(width = 100, height = 100)
+    if profile_image.attached?
+      profile_image.variant(resize_to_limit: [width, height])
+    else
+      'no_image.jpg'
+    end
   end
+
 end
