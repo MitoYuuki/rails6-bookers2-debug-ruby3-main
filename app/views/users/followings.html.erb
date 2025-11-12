@@ -1,0 +1,10 @@
+<h1><%= @user.name %> さんがフォローしているユーザー一覧</h1>
+<% if @followings.present? %>
+  <ul>
+    <% @followings.each do |following| %>
+      <li><%= link_to following.name, user_path(following) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>フォローしているユーザーはいません。</p>
+<% end %>
