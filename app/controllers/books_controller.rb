@@ -14,12 +14,18 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = current_user.books.new(book_params)
-    if @book.save
-      redirect_to user_path(current_user), notice: "You have created book successfully."
+    @book_comment = current_user.book_comments.new(book_comment_params)
+    @book_comment.book_id = params[:book_id]
+    if @book_comment.save
+      respond_to do |format|
+        format.html { redirect_to book_path(@book_comment.book) } # 通常のHTML
+        format.js   # create.js.erb を返す
+      end
     else
-      @books = Book.all
-      render 'index'
+      respond_to do |format|
+        format.html { render 'books/show' }
+        format.js   # エラー用のcreate.js.erb
+      end
     end
   end
 
@@ -39,7 +45,10 @@ class BooksController < ApplicationController
   def destroy
     @book = Book.find(params[:id])
     @book.destroy
-    redirect_to books_path
+    respond_to do |format|
+    format.html { redirect_to books_path, notice: '本を削除しました' }
+    format.js   # destroy.js.erb を返す
+    end
   end
 
   private
