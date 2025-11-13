@@ -17,13 +17,13 @@
   <tr>
     <th>Follows</th>
     <td>
-      <%= link_to user.followings.count, followings_user_path(user), class: "btn btn-link p-0" %>
+      <%= link_to user.followings.count, user_followings_path(user), class: "btn btn-link p-0" %>
     </td>
   </tr>
   <tr>
     <th>Followers</th>
     <td>
-      <%= link_to user.followers.count, followers_user_path(user), class: "btn btn-link p-0" %>
+      <%= link_to user.followers.count, user_followers_path(user), class: "btn btn-link p-0" %>
     </td>
   </tr>
 </table>
