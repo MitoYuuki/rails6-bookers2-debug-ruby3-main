@@ -12,7 +12,18 @@
   </tr>
   <tr>
     <th>Introduction</th>
-    <td><%= user.introduction.presence || "未登録" %></td>
+    <td>
+      <%= user.introduction.presence || "未登録" %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      <div class>
+        <%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary w-100" do %>
+          <i class="fas fa-user-cog"></i>
+        <% end %>
+      </div>
+    </th>
   </tr>
   <tr>
     <th>Follows</th>
